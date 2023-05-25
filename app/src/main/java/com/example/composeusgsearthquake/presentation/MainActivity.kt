@@ -1,4 +1,4 @@
-package com.example.composeusgsearthquake
+package com.example.composeusgsearthquake.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
