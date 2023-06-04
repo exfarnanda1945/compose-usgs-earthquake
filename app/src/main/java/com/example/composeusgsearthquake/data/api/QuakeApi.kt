@@ -7,10 +7,11 @@ import retrofit2.http.Query
 
 interface QuakeApi {
     @GET("query")
-    fun getList(
+    suspend fun getList(
         @Query(RemoteSourceConstant.QUERY_END_TIME) endTime: String,
         @Query(RemoteSourceConstant.QUERY_LIMIT) pageSize: Int,
         @Query(RemoteSourceConstant.QUERY_OFFSET) page: Int,
+        @Query(RemoteSourceConstant.QUERY_MIN_MAG) minMag: Double = 3.0,
         @Query(RemoteSourceConstant.QUERY_FORMAT) format: String = "geojson",
         @Query(RemoteSourceConstant.QUERY_ORDER_BY) orderBy: String = "time"
     ): QuakeDto
