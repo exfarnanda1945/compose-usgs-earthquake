@@ -16,12 +16,14 @@ import javax.inject.Inject
 class QuakePagingSource @Inject constructor(private val api: QuakeApi) :
     PagingSource<Int, Quake>() {
     override fun getRefreshKey(state: PagingState<Int, Quake>): Int? {
-        return null
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Quake> {
         val page = params.key ?: PAGE_INITIALIZE
-
         return try {
             val response = api.getList(
                 endTime = SimpleDateFormat(
