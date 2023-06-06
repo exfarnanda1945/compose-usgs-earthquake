@@ -1,5 +1,9 @@
 package com.example.composeusgsearthquake.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Quake(
     val id: String,
     val mag: Double,
@@ -10,4 +14,4 @@ data class Quake(
     val title: String,
     val latitude: Double,
     val longitude: Double,
-)
+):Parcelable
